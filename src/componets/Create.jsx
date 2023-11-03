@@ -3,24 +3,34 @@ import { useState } from 'react';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './signin.css';
+import { Link, useNavigate } from 'react-router-dom';
+
 const Create = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
   const createAccount = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
+        if (userCredential) {
+          navigate('/Home');
+        } else {
+          console.log('hh');
+        }
       })
       .catch((error) => {
-        console.log('error');
+        console.log(error);
       });
   };
+
   return (
-    <div class="login-page">
+    <div className="login-page">
       <form onSubmit={createAccount}>
         <h1>create your account</h1>
-        <div class="inputs">
+        <div className="inputs">
           <input
             type="email"
             value={email}
@@ -34,8 +44,13 @@ const Create = () => {
             placeholder="enter yor password"
           />
         </div>
-        <button type="submit">create</button>
+        <button type="submit">Create Account</button>
       </form>
+      <div style={{ marginTop: '20px', marginBottom: '20px' }}>OR</div>
+
+      <Link to="/signIn" className="button" style={{ width: '100%' }}>
+        Login Account
+      </Link>
     </div>
   );
 };
