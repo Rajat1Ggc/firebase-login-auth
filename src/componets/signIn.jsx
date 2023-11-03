@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
+import './signin.css';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -44,31 +45,35 @@ const SignIn = () => {
   }, []);
 
   return (
-    <div>
+    <div class="login-page">
       <form onSubmit={loginAccount}>
         <h1>login your account</h1>
-        <input
-          type="email"
-          value={email}
-          placeholder="enter yor mail"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="enter yor password"
-        />
+        <div class="inputs">
+          <input
+            type="email"
+            value={email}
+            placeholder="Enter yorr Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter yorr Password"
+          />
+        </div>
         <button type="submit">Login</button>
       </form>
-      {user ? (
-        <>
-          <p>wellcome, {user.email}</p>
-          <button onClick={logout}>logout</button>
-        </>
-      ) : (
-        <p>YOU ARE NOT LOGIN please signIn</p>
-      )}
+      <div>
+        {user ? (
+          <>
+            <p>wellcome, {user.email}</p>
+            <button onClick={logout}>logout</button>
+          </>
+        ) : (
+          <p>YOU ARE NOT LOGIN please signIn</p>
+        )}
+      </div>
     </div>
   );
 };
