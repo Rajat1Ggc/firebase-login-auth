@@ -1,11 +1,9 @@
-import SignIn from './componets/signIn';
-import Create from './componets/Create';
-
+import './app.css';
+import Navigation from './componets/Navigation';
 function App() {
   return (
     <div className="App">
-      <Create />
-      <SignIn />
+      <Navigation />
     </div>
   );
 }
